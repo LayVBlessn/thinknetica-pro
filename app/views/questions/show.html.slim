@@ -1,5 +1,7 @@
 h1= @question.title
 p= @question.body
-p= link_to 'Delete this question', question_path(@question), method: :delete
+-if @question.user == current_user
+  p= link_to 'Delete this question', question_path(@question), method: :delete
+
 = render 'answers/form'
 =render @question.answers

@@ -7,6 +7,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @answer = @question.answers.new
   end
 
   def new
@@ -36,8 +37,12 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.destroy
-    redirect_to questions_path
+    if @question.user == current_user
+      @question.destroy 
+      redirect_to questions_path, notice: 'Question was successfully deleted'
+    else
+      redirect_to question_path(@question), notice: 'Only Author can delete this question'
+    end
   end
 
   private

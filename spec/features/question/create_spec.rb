@@ -15,8 +15,6 @@ feature 'User can create a question', %q{
     end
 
     scenario 'asks a question' do
-      visit questions_path
-      click_on 'Ask question'
   
       fill_in 'Title', with: 'Test question'
       fill_in 'Body', with: 'text text text'

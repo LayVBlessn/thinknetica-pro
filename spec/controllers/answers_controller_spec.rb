@@ -5,7 +5,6 @@ RSpec.describe AnswersController, type: :controller do
   let(:question) { create(:question) }
 
   describe 'POST #create' do
-
     before { login(user) }
 
     context 'with valid attributes' do
@@ -32,30 +31,24 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:answer) { create(:answer) }
+    let!(:answer) { create(:answer, question: question, user: user) }
 
     describe 'Author' do
-      before { login(answer.user) }
+      before { login(user) }
+
       it 'deletes his answer' do
-        expect { delete :destroy, params: { id:answer, question_id: question } }.to change(Answer, :count).by(-1)
+        expect { delete :destroy, params: { id: answer, question_id: question } }.to change(Answer, :count).by(-1)
       end
 
       it 'redirects to show' do
-        delete :destroy, params: { id:answer, question_id: question }
+        delete :destroy, params: { id: answer, question_id: question }
         expect(response).to redirect_to question_path(question)
       end
     end
 
     describe 'User' do
-      before { login(user) }
-
       it 'do not deletes anothers answers' do
-        expect { delete :destroy, params: { id:answer, question_id: question } }.not_to change(Answer, :count)
-      end
-
-      it 'redirects to show' do
-        delete :destroy, params: { id:answer, question_id: question }
-        expect(response).to redirect_to question_path(question)
+        expect { delete :destroy, params: { id: answer, question_id: question } }.not_to change(Answer, :count)
       end
     end
   end

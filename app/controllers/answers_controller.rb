@@ -3,8 +3,7 @@ class AnswersController < ApplicationController
   before_action :find_question
 
   def create
-    @answer = @question.answers.new(answer_params)
-    current_user.answers << @answer
+    @answer = Answer.new(answer_params.merge(user: current_user, question: @question))
     if @answer.save
       redirect_to question_path(@question), notice: 'Answer successfully aded!'
     else
@@ -15,7 +14,7 @@ class AnswersController < ApplicationController
   def destroy
     @answer = Answer.find(params[:id])
 
-    if @answer.user == current_user
+    if current_user.author_of?(@answer)
       @answer.destroy
       redirect_to question_path(@question), notice: 'Answer was successfully deleted'
     else

@@ -16,13 +16,12 @@ feature 'User can create an answer', %q{
     end
 
     scenario 'adds answer to a question' do
-      answer = create(:answer)
 
-      fill_in 'Body', with: answer.body
+      fill_in 'Body', with: 'Body'
       click_on 'Add answer'
 
       expect(page).to have_content 'Answer successfully aded!'
-      expect(page).to have_content answer.body
+      expect(page).to have_content 'Body'
     end
   
     scenario 'adds an answer with errors' do

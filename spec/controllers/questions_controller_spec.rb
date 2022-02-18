@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
@@ -74,7 +76,9 @@ RSpec.describe QuestionsController, type: :controller do
 
     context 'with invalid attributes' do
       it 'does not save the question' do
-        expect { post :create, params: { question: attributes_for(:question, :invalid) } }.to_not change(Question, :count)
+        expect do
+          post :create, params: { question: attributes_for(:question, :invalid) }
+        end.to_not change(Question, :count)
       end
 
       it 're-renders new view' do
@@ -137,7 +141,6 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
     describe 'User' do
-
       it 'do not deletes anothers question' do
         expect { delete :destroy, params: { id: question } }.not_to change(Question, :count)
       end

@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'User can sign up', %q{
+feature 'User can sign up', "
   In order to ask questions
   As authenticated user
   I'd like to sign up
-}do
-
+" do
   scenario 'Registered User tries to sign up' do
     user = create(:user)
     sign_up(user)
@@ -16,7 +17,7 @@ feature 'User can sign up', %q{
   scenario 'Unregistered User tries to sign up' do
     user = build(:user)
     sign_up(user)
-  
+
     expect(page).to have_content 'Welcome! You have signed up successfully.'
   end
 

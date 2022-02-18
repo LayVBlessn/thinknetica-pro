@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'User can create an answer', %q{
+feature 'User can create an answer', "
   In order to post answer for a question
   As an authenticated user
   I'd like to be able to answer on question
-}do
-
+" do
   given(:user) { create(:user) }
   given(:question) { create(:question) }
 
@@ -16,17 +17,16 @@ feature 'User can create an answer', %q{
     end
 
     scenario 'adds answer to a question' do
-
       fill_in 'Body', with: 'Body'
       click_on 'Add answer'
 
       expect(page).to have_content 'Answer successfully aded!'
       expect(page).to have_content 'Body'
     end
-  
+
     scenario 'adds an answer with errors' do
       click_on 'Add answer'
-  
+
       expect(page).to have_content "Body can't be blank"
     end
   end

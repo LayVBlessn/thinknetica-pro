@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -10,7 +12,7 @@ RSpec.describe User, type: :model do
   describe 'Model methods' do
     let(:user_one) { create(:user) }
     let(:user_two) { build(:user) }
-    let(:question)  { create(:question, user: user_one) }
+    let(:question) { create(:question, user: user_one) }
     let(:answer) { create(:answer, user: user_one) }
 
     it 'should determine user is an author of question and asnwer' do
@@ -18,7 +20,7 @@ RSpec.describe User, type: :model do
       expect(user_one).to be_author_of(answer)
     end
 
-    it 'should show that user is not an author of question and answer' do 
+    it 'should show that user is not an author of question and answer' do
       expect(user_two).not_to be_author_of(question)
       expect(user_two).not_to be_author_of(answer)
     end

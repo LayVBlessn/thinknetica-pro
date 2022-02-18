@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :find_question, only: %i[show edit update destroy]
@@ -25,8 +27,7 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @question.update(question_params)
@@ -38,7 +39,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     if current_user.author_of?(@question)
-      @question.destroy 
+      @question.destroy
       redirect_to questions_path, notice: 'Question was successfully deleted'
     else
       redirect_to question_path(@question), notice: 'Only Author can delete this question'

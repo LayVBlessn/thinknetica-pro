@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'User can delete a question', %q{
+feature 'User can delete a question', "
   In order to delete question from a community
   As an authenticated user
   I'd like to be able to delete a question
-}do
+" do
   given(:user_one) { create(:user) }
   given(:user_two) { create(:user) }
   given!(:question) { create(:question, user: user_one) }

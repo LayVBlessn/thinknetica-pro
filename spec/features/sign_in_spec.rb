@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'User can sign in', %q{
+feature 'User can sign in', "
   In order to ask questions
   As an inauthentificated user
   I'd like to be able to sign in
-}do
-
-  scenario 'Registered user tries to sign in' do 
-    user = create(:user)   
+" do
+  scenario 'Registered user tries to sign in' do
+    user = create(:user)
     sign_in(user)
 
     expect(page).to have_content 'Signed in successfully.'

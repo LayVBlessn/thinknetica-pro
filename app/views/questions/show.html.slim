@@ -4,5 +4,13 @@ p= @question.body
 -if current_user&.author_of?(@question)
   p= link_to 'Delete this question', question_path(@question), method: :delete
 
-= render 'answers/form'
-=render @question.answers if @question.answers.present?
+.answers
+  =render @question.answers if @question.answers.present?
+
+.answer-errors
+  = render 'shared/errors', resource: @answer
+  
+= form_with model: [@question, @answer], class: 'new-answer', local: false do |f|
+ = f.label :body
+ = f.text_field :body
+ = f.submit 'Add answer'

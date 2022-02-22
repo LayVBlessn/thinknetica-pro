@@ -10,7 +10,7 @@ feature 'User can create an answer', "
   given(:user) { create(:user) }
   given(:question) { create(:question) }
 
-  describe 'Authenticated user' do
+  describe 'Authenticated user', js: true do
     background do
       sign_in(user)
       visit question_path(question)
@@ -20,7 +20,6 @@ feature 'User can create an answer', "
       fill_in 'Body', with: 'Body'
       click_on 'Add answer'
 
-      expect(page).to have_content 'Answer successfully aded!'
       expect(page).to have_content 'Body'
     end
 

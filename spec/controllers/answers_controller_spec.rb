@@ -45,18 +45,18 @@ RSpec.describe AnswersController, type: :controller do
       before { login(user) }
 
       it 'deletes his answer' do
-        expect { delete :destroy, params: { id: answer, question_id: question } }.to change(Answer, :count).by(-1)
+        expect { delete :destroy, params: { id: answer, question_id: question, format: :js } }.to change(Answer, :count).by(-1)
       end
 
       it 'redirects to show' do
-        delete :destroy, params: { id: answer, question_id: question }
-        expect(response).to redirect_to question_path(question)
+        delete :destroy, params: { id: answer, question_id: question }, format: :js
+        expect(response).to render_template :destroy
       end
     end
 
     describe 'User' do
       it 'do not deletes anothers answers' do
-        expect { delete :destroy, params: { id: answer, question_id: question } }.not_to change(Answer, :count)
+        expect { delete :destroy, params: { id: answer, question_id: question } }.not_to change(Answer, :count), format: :js
       end
     end
   end

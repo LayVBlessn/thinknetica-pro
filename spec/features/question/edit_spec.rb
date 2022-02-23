@@ -36,27 +36,30 @@ feature 'User can edit his question', %q{
       end
     end
 
-    # scenario 'edits his answer with errors', js: true do
-    #   sign_in user
+    scenario 'edits his answer with errors', js: true do
+      sign_in user
 
-    #   visit question_path(question)
+      visit question_path(question)
       
-    #   click_on 'Edit'
+      click_on 'Edit'
 
-    #   within '.answers' do
-    #     fill_in 'Body', with: ''
-    #     click_on 'Save'
-    #   end
+      within '.question' do
+        fill_in 'Title', with: ''
+        fill_in 'Body', with: ''
+        click_on 'Save'
+      end 
+      expect(page).to have_content "Title can't be blank"
+      expect(page).to have_content "Body can't be blank"
+    end
 
-    #   expect(page).to have_content "Body can't be blank"
-    # end
+    scenario "tries to edit other user's answer" do
+      sign_in user2
 
-    # scenario "tries to edit other user's answer" do
-    #   sign_in user2
+      visit question_path(question)
 
-    #   visit question_path(question)
-
-    #   expect(page).not_to have_content 'Edit'
-    # end
+      within '.question' do
+        expect(page).not_to have_content 'Edit'
+      end
+    end
   end
 end

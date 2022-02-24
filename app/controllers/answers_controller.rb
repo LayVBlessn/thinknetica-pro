@@ -16,6 +16,7 @@ class AnswersController < ApplicationController
 
   def destroy
     if current_user.author_of?(@answer)
+      @answer.question.update(best_answer_id: nil)
       @answer.destroy
     end
   end

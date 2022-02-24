@@ -6,5 +6,9 @@ Rails.application.routes.draw do
 
   resources :questions do
     resources :answers, shallow: true, only: %i[create destroy update]
+    
+    member do
+      post 'best_answer/:best_answer_id', to: 'questions#best_answer', as: 'best_answer'
+    end
   end
 end

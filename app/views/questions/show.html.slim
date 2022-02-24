@@ -4,6 +4,9 @@
 .question-errors
   = render 'shared/errors', resource: @question
 
+.best-answer
+  =render 'answers/best_answer', answer: Answer.find(@question.best_answer_id) if @question.best_answer_id != nil
+
 .answers
   =render @question.answers if @question.answers.present?
 

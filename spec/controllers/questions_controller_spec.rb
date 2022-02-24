@@ -150,18 +150,18 @@ RSpec.describe QuestionsController, type: :controller do
   describe 'POST #best_answer' do
     let!(:answer) { create(:answer, question: question, user: user) }
     let(:answer_two) { create(:answer, question: question, user: user) }
-    
+
     before { login(user) }
-    
+
     it 'matches the best answer' do
-      post :best_answer, params: { best_answer_id: answer, id: question}, format: :js
+      post :best_answer, params: { best_answer_id: answer, id: question }, format: :js
       expect(assigns(:question).best_answer_id).to eq answer.id
     end
 
     it 'mathes new best answer' do
-      post :best_answer, params: { best_answer_id: answer, id: question}, format: :js
-      post :best_answer, params: { best_answer_id: answer_two, id: question}, format: :js
-      
+      post :best_answer, params: { best_answer_id: answer, id: question }, format: :js
+      post :best_answer, params: { best_answer_id: answer_two, id: question }, format: :js
+
       expect(assigns(:question).best_answer_id).to eq answer_two.id
     end
   end

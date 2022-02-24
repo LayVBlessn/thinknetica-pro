@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'User can edit his question', %q{
+feature 'User can edit his question', "
   In order to correct mistakes
   As an author of question
   I'd like to be able to edit my question
-} do
+" do
   given!(:user) { create(:user) }
   given!(:question) { create(:question, user: user) }
   given!(:user2) { create(:user) }
@@ -40,14 +42,14 @@ feature 'User can edit his question', %q{
       sign_in user
 
       visit question_path(question)
-      
+
       click_on 'Edit'
 
       within '.question' do
         fill_in 'Title', with: ''
         fill_in 'Body', with: ''
         click_on 'Save'
-      end 
+      end
       expect(page).to have_content "Title can't be blank"
       expect(page).to have_content "Body can't be blank"
     end

@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'User can mark the best answer', %q{
+feature 'User can mark the best answer', "
   In order to match the best answer
   As an author of question
   I'd like to be able to match the best answer
-} do
-
+" do
   given!(:user) { create(:user) }
   given!(:user_two) { create(:user) }
   given!(:question) { create(:question, user: user) }
@@ -30,7 +31,7 @@ feature 'User can mark the best answer', %q{
       click_on 'Mark as the best answer'
 
       answer_two = create(:answer, user: user, question: question)
-      
+
       click_on 'Mark as the best answer'
 
       within '.best-answer' do

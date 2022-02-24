@@ -32,7 +32,7 @@ feature 'User can create an answer', "
 
   scenario 'Unauthenticated user tries to add an answer' do
     visit question_path(question)
-    
+
     fill_in 'answer_body', with: 'Answer'
     click_on 'Add answer'
 

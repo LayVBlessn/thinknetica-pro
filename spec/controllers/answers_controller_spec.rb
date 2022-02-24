@@ -45,7 +45,9 @@ RSpec.describe AnswersController, type: :controller do
       before { login(user) }
 
       it 'deletes his answer' do
-        expect { delete :destroy, params: { id: answer, question_id: question, format: :js } }.to change(Answer, :count).by(-1)
+        expect do
+          delete :destroy, params: { id: answer, question_id: question, format: :js }
+        end.to change(Answer, :count).by(-1)
       end
 
       it 'redirects to show' do
@@ -56,7 +58,9 @@ RSpec.describe AnswersController, type: :controller do
 
     describe 'User' do
       it 'do not deletes anothers answers' do
-        expect { delete :destroy, params: { id: answer, question_id: question } }.not_to change(Answer, :count), format: :js
+        expect do
+          delete :destroy, params: { id: answer, question_id: question }
+        end.not_to change(Answer, :count), format: :js
       end
     end
   end
@@ -69,7 +73,7 @@ RSpec.describe AnswersController, type: :controller do
 
       context 'with valid attributes' do
         it 'changes answer attributes' do
-          patch :update, params: { id: answer, answer: {body: 'new body' } }, format: :js
+          patch :update, params: { id: answer, answer: { body: 'new body' } }, format: :js
           answer.reload
           expect(answer.body).to eq 'new body'
         end

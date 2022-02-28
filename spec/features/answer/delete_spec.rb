@@ -13,12 +13,12 @@ feature 'User can delete an answer', "
   given!(:answer) { create(:answer, question: question, user: user_one) }
 
   describe 'Autheticated user' do
-    scenario 'tries to delete his answer' do
+    scenario 'tries to delete his answer', js: true do
       sign_in(user_one)
       visit question_path(question)
       click_on 'Delete this answer'
 
-      expect(page).to have_content 'Answer was successfully deleted'
+      expect(page).not_to have_content answer.body
     end
 
     scenario 'tries to delete others answers' do

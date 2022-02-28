@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   root 'questions#index'
 
   resources :questions do
-    resources :answers, only: %i[create destroy]
+    resources :answers, shallow: true, only: %i[create destroy update]
+
+    member do
+      post 'best_answer/:best_answer_id', to: 'questions#best_answer', as: 'best_answer'
+    end
   end
 end

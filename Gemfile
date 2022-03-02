@@ -29,6 +29,7 @@ gem 'slim-rails'
 gem 'devise'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootstrap', '~> 5.1.3'
 gem 'rubocop', '~> 1.25', require: false
 
 group :development, :test do
@@ -60,3 +61,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+gem 'aws-sdk-s3', require: false

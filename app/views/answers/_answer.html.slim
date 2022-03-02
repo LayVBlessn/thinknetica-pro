@@ -1,6 +1,11 @@
 div id="#{answer.id}"
   -unless answer.best_answer? 
     p= answer.body
+    .links
+      p Links:
+      ul 
+        -answer.links.each do |link|
+          li= link_to link.name, link.url, target: :blank
 
     -if answer.files.attached?
       -answer.files.each do |file|
@@ -17,8 +22,11 @@ div id="#{answer.id}"
       p= link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id}
 
     = form_with model: answer, class: 'hidden', html: { id: "edit-answer-#{ answer.id }"} do |f|
-      = f.label :body
-      = f.text_area :body
-      = f.label :files
-      = f.file_field :files, multiple: true
+      p
+        = f.label :body
+        = f.text_area :body
+      p
+        = f.label :files
+        = f.file_field :files, multiple: true
+
       = f.submit 'Save'

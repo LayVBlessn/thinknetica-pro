@@ -1,7 +1,7 @@
 div id="#{answer.id}"
   -unless answer.best_answer? 
     p= answer.body
-    .links
+    .links-render
       p Links:
       ul 
         -answer.links.each do |link|

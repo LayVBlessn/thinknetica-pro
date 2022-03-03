@@ -36,7 +36,7 @@ div id="#{answer.id}"
         = f.label :files
         = f.file_field :files, multiple: true
       p Links: 
-      p 
+      p
         = f.fields_for :links do |link|
           = render 'links/link_fields', f: link
         .links

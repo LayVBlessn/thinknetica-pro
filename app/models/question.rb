@@ -5,7 +5,7 @@ class Question < ApplicationRecord
   belongs_to :best_answer, class_name: 'Answer', foreign_key: 'best_answer_id', optional: true
 
   has_many :links, dependent: :destroy, as: :linkable
-  has_one :reward, dependent: :destroy, as: :rewardable
+  has_one :reward, dependent: :destroy
   has_many_attached :files
   has_many :answers, dependent: :destroy
 

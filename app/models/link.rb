@@ -7,6 +7,6 @@ class Link < ApplicationRecord
   validates :url, format: URI::DEFAULT_PARSER.regexp[:ABS_URI]
 
   def is_gist?
-    url.match(GIST_URL)
+    url.match(GIST_URL) 
   end
 end

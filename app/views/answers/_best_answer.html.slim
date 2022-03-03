@@ -3,12 +3,15 @@ div id="#{answer.id}"
   -unless answer.links.blank?
     .links-render
       p Links:
-      ul 
+      ul
         -answer.links.each do |link|
-          -if link.is_gist?
-            p= javascript_include_tag(link.url + '.js')
-          -else 
-            li= link_to link.name, link.url, target: :blank
+          div id="link-#{link.id}"
+            -if link.is_gist?
+              p= javascript_include_tag(link.url + '.js')
+            -else 
+              li= link_to link.name, link.url, target: :blank
+            -if current_user&.author_of?(answer)
+              p= link_to "Delete link on #{link.name}", link_path(link), method: :delete, remote: true
 
   -if answer.files.attached?
     -answer.files.each do |file|

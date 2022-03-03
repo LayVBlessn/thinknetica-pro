@@ -1,11 +1,16 @@
 h1= question.title
 p= question.body
 
-.links-render
-  p Links:
-  ul 
-    -@question.links.each do |link|
-      li= link_to link.name, link.url, target: :blank
+-unless question.links.blank?
+  .links-render
+    p Links:
+    ul 
+      -@question.links.each do |link|
+        -if link.is_gist?
+          p= javascript_include_tag(link.url + '.js')
+        -else 
+          li= link_to link.name, link.url, target: :blank
+
 
 -if @question.files.attached?
   -@question.files.each do |file|

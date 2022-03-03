@@ -30,6 +30,11 @@ feature 'User can edit his question', "
         fill_in 'Body', with: 'edited question body'
         attach_file 'File', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
 
+        click_on 'Add Link'
+
+        fill_in 'Link name', with: 'Vk'
+        fill_in 'Url', with: 'https://vk.com'
+
         click_on 'Save'
 
         expect(page).to_not have_content question.title
@@ -39,6 +44,7 @@ feature 'User can edit his question', "
         expect(page).to_not have_selector 'textarea'
         expect(page).to have_link 'spec_helper.rb'
         expect(page).to have_link 'rails_helper.rb'
+        expect(page).to have_link 'Vk'
       end
     end
 

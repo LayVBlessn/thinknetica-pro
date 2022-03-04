@@ -39,7 +39,7 @@ feature 'User can create a question', "
       within '.que-attach' do
         attach_file 'File', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
       end
-      
+
       click_on 'Ask'
 
       expect(page).to have_link 'spec_helper.rb'

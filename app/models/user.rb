@@ -11,4 +11,8 @@ class User < ApplicationRecord
   def author_of?(object)
     object.user_id == id
   end
+
+  def claim_reward(reward)
+    rewards.push(reward)
+  end
 end

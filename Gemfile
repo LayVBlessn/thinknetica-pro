@@ -30,8 +30,8 @@ gem 'devise'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap', '~> 5.1.3'
+gem 'cocoon'
 gem 'rubocop', '~> 1.25', require: false
-gem "cocoon"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

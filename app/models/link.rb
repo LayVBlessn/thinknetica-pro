@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Link < ApplicationRecord
-  GIST_URL = /gist.github.com/
+  GIST_URL = /gist.github.com/.freeze
 
   belongs_to :linkable, polymorphic: true
 
@@ -7,6 +9,6 @@ class Link < ApplicationRecord
   validates :url, format: URI::DEFAULT_PARSER.regexp[:ABS_URI]
 
   def is_gist?
-    url.match(GIST_URL) 
+    url.match(GIST_URL)
   end
 end

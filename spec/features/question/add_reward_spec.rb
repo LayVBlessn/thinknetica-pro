@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'User can add reward to question', %q{
+feature 'User can add reward to question', "
   In order to give reward for best answers for my question
   As an question's author
   I'd like to be able to add reward
-}do
-
+" do
   given(:user) { create(:user) }
-  
+
   scenario 'User adds reward for question' do
     sign_in(user)
     visit new_question_path
@@ -17,7 +18,7 @@ feature 'User can add reward to question', %q{
     fill_in 'Name', with: 'reward name'
 
     within '.reward' do
-      attach_file 'File', "/home/layv/Pictures/Screenshot from 2022-01-16 02-57-43.png"
+      attach_file 'File', '/home/layv/Pictures/Screenshot from 2022-01-16 02-57-43.png'
     end
 
     click_on 'Ask'

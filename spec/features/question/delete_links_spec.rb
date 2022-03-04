@@ -22,7 +22,7 @@ feature 'User can delete his links', "
 
     click_on 'Ask'
 
-    click_on 'Delete link on Vk'  
+    click_on 'Delete link on Vk'
 
     expect(page).not_to have_content 'Vk'
   end

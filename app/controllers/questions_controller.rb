@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
   def best_answer
     @answer = Answer.find(params[:best_answer_id])
     @question.update(best_answer_id: @answer.id)
-    @answer.user.rewards.push(@question.reward) unless @question.reward.blank?
+    @answer.user.claim_reward(@question.reward) unless @question.reward.blank?
   end
 
   def show
@@ -58,7 +58,7 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :body, files: [],
-                                     links_attributes: [:name, :url, :id, :_destroy], 
-                                     reward_attributes: [:name, :file])
+                                                    links_attributes: %i[name url id _destroy],
+                                                    reward_attributes: %i[name file])
   end
 end

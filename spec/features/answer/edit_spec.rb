@@ -29,7 +29,7 @@ feature 'User can edit his answer', "
       within '.answers' do
         fill_in 'Body', with: 'edited answer'
         attach_file 'File', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
-        
+
         click_on 'Add Link'
 
         fill_in 'Link name', with: 'Vk'

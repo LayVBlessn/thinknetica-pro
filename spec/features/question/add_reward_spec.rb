@@ -25,6 +25,4 @@ feature 'User can add reward to question', %q{
     expect(page).to have_content 'reward name'
     expect(page).to have_css("img[alt*='reward name picture']")
   end
-
-
 end

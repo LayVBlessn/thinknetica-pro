@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :attachments, only: :destroy
   resources :links, only: :destroy
+  resources :rewards, only: :index
 
   resources :questions do
     resources :answers, shallow: true, only: %i[create destroy update]

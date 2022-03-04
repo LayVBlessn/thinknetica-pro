@@ -10,6 +10,7 @@ class QuestionsController < ApplicationController
   def best_answer
     @answer = Answer.find(params[:best_answer_id])
     @question.update(best_answer_id: @answer.id)
+    @answer.user.rewards.push(@question.reward) unless @question.reward.blank?
   end
 
   def show

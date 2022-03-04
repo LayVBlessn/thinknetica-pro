@@ -1,12 +1,32 @@
 = render 'shared/errors', resource: @question
 
 = form_with model: @question, local: true do |f|
- = f.label :title
- = f.text_field :title 
+  p
+    = f.label :title
+    = f.text_field :title 
+  p
+    = f.label :body
+    = f.text_field :body
+  .que-attach
+    p
+      = f.label :files
+      = f.file_field :files, multiple: true
 
- = f.label :body
- = f.text_field :body
-
- = f.label :files
- = f.file_field :files, multiple: true
- = f.submit 'Ask'
+  p Links: 
+  p 
+    = f.fields_for :links do |link|
+      = render 'link_fields', f: link
+    .links
+      = link_to_add_association 'Add Link', f, :links
+  
+  .reward
+    p Reward:
+    p 
+      = f.fields_for :reward do |reward|
+        p
+          = reward.label :name
+          = reward.text_field :name
+        p 
+          = reward.label :file
+          = reward.file_field :file
+  = f.submit 'Ask'

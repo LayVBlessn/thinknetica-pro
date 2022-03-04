@@ -1,5 +1,25 @@
 h1= question.title
 p= question.body
+
+-unless question.reward.blank?
+  .reward
+    p Reward:
+    p= question.reward.name
+    = image_tag question.reward.file, size: "100x100", alt: "#{question.reward.name} picture"
+
+-unless question.links.blank?
+  .links-render
+    p Links:
+    ul 
+      -@question.links.each do |link|
+        div id="link-#{link.id}"
+          -if link.is_gist?
+            p= javascript_include_tag(link.url + '.js')
+          -else 
+            li= link_to link.name, link.url, target: :blank
+          -if current_user&.author_of?(question)
+            p= link_to "Delete link on #{link.name}", link_path(link), method: :delete, remote: true
+
 -if @question.files.attached?
   -@question.files.each do |file|
     div id="attach-#{file.id}"
@@ -12,10 +32,20 @@ p= question.body
   p= link_to 'Edit this question', '#', class: 'edit-question-link', data: { question_id: question.id}
   
 = form_with model: question, class: 'hidden', html: { id: "edit-question-#{ question.id }"} do |f|
-  = f.label :title
-  = f.text_area :title
-  = f.label :body
-  = f.text_area :body
-  = f.label :files
-  = f.file_field :files, multiple: true
+  p
+    = f.label :title
+    = f.text_area :title
+  p
+    = f.label :body
+    = f.text_area :body
+  p
+    = f.label :files
+    = f.file_field :files, multiple: true
+  p Links: 
+  p
+    = f.fields_for :links do |link|
+      = render 'link_fields', f: link
+    .links
+      = link_to_add_association 'Add Link', f, :links
+
   = f.submit 'Save'

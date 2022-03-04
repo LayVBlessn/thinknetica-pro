@@ -30,6 +30,7 @@ gem 'devise'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap', '~> 5.1.3'
+gem 'cocoon'
 gem 'rubocop', '~> 1.25', require: false
 
 group :development, :test do

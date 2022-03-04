@@ -1,6 +1,12 @@
 h1= question.title
 p= question.body
 
+-unless question.reward.blank?
+  .reward
+    p Reward:
+    p= question.reward.name
+    = image_tag question.reward.file, size: "100x100", alt: "#{question.reward.name} picture"
+
 -unless question.links.blank?
   .links-render
     p Links:

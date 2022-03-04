@@ -9,7 +9,7 @@ feature 'User can delete his attachments', "
 " do
   given(:user) { create(:user) }
 
-  scenario 'tries to delete his answer', js: true do
+  scenario 'tries to delete his answer attach', js: true do
     sign_in(user)
     visit questions_path
 
@@ -17,8 +17,9 @@ feature 'User can delete his attachments', "
 
     fill_in 'Title', with: 'Title'
     fill_in 'Body', with: 'Body'
-    attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
-
+    within '.que-attach' do
+      attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
+    end
     click_on 'Ask'
 
     click_on 'Delete spec_helper.rb'
